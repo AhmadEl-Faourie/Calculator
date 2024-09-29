@@ -1,0 +1,79 @@
+#include <iostream>
+using namespace std;
+
+enum Operations
+{
+	add,
+	subtract,
+	multiply,
+	divide,
+	squared
+};
+void lookingNiceEquation(int num1, int num2, char operand);
+void identifyOperand(char operand, int& opercode);
+int calculator(int num1, int num2, int opercode);
+int main()
+{
+	/* Calculator using a switch statement and the user can enter the equation as 2+2, 3*5, etc */
+	int num1 = 0;
+	int num2 = 0;
+	char operand = 's';
+	int opercode = 0;
+
+	while (!(num1 == 1 && operand == '/' && num2 == 0))
+	{
+		cout << "Enter your equation in following format: 3*5 \n" << "Enter 1/0 to Exit." << endl;
+		cin >> num1 >> operand >> num2;
+
+		identifyOperand(operand, opercode);
+		lookingNiceEquation(num1, num2, operand);
+		cout << calculator(num1, num2, opercode);
+		cout << endl;
+	}
+
+	return 0;
+}
+
+void identifyOperand(char operand, int& opercode)
+{
+	if (operand == '+')
+	{
+		opercode = add;
+	}
+
+	else if (operand == '-')
+	{
+		opercode = subtract;
+	}
+
+	else if (operand == '*')
+	{
+		opercode = multiply;
+	}
+
+	else if (operand == '/')
+	{
+		opercode = divide;
+	}
+
+	else if (operand == '^')
+	{
+		opercode = squared;
+	}
+
+}
+
+int calculator(int num1, int num2, int opercode)
+{switch (opercode)
+{
+case add: return num1 + num2;
+case subtract: return num1 - num2;
+case multiply: return num1 * num2;
+case divide: return num1 / num2;
+case squared: return pow(num1, num2);
+}}
+
+void lookingNiceEquation(int num1, int num2, char operand)
+{
+	cout << num1 << operand << num2 << ' ' << '=' << ' ';
+}
